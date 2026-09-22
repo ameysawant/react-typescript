@@ -15,6 +15,39 @@
 // interface
 // optional
 
+type Friend = {
+  friendName: string;
+  friendAge: number;
+};
+
+//  type Product = { id: number; name: string; price: number }[];
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+}
+
+//   type Person = Friend & {
+//     name: string;
+//     surname: string;
+//     age: number;
+//     hobbies: string[];
+//     places: ("bandra" | "andheri")[]; // union
+//     countries: Cities;
+//     // friend: Friend;
+//   };
+
+type Cities = ["india", "usa", "china"];
+interface Person {
+  name: string;
+  surname: string;
+  age: number;
+  hobbies: string[];
+  places: ("bandra" | "andheri")[]; // union
+  countries: Cities;
+  friend: Friend;
+}
+
 const Basics = () => {
   // string
   let myname: string = "Kishori Tutorials";
@@ -34,43 +67,11 @@ const Basics = () => {
   // array of string and number
   let myStringAndNo: (string | number)[] = [45, 57, 66, "abc"];
 
-  //  type Product = { id: number; name: string; price: number }[];
-  interface Product {
-    id: number;
-    name: string;
-    price: number;
-  }
   // array of objects
   let products: Product[] = [
     { id: 1, name: "shampoo", price: 45 },
     { id: 2, name: "oil", price: 55 },
   ];
-
-  type Friend = {
-    friendName: string;
-    friendAge: number;
-  };
-
-  //   type Person = Friend & {
-  //     name: string;
-  //     surname: string;
-  //     age: number;
-  //     hobbies: string[];
-  //     places: ("bandra" | "andheri")[]; // union
-  //     countries: Cities;
-  //     // friend: Friend;
-  //   };
-
-  interface Person {
-    name: string;
-    surname: string;
-    age: number;
-    hobbies: string[];
-    places: ("bandra" | "andheri")[]; // union
-    countries: Cities;
-    friend: Friend;
-  }
-  type Cities = ["india", "usa", "china"];
 
   let person: Person = {
     name: "Kishori",
