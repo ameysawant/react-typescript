@@ -1,6 +1,7 @@
 import Basics from "./components/Basics";
 import Button from "./components/Button";
 import Functions from "./components/Functions";
+import States from "./components/States";
 
 const App = () => {
   const handleClick = () => {
@@ -12,7 +13,7 @@ const App = () => {
     <>
       {/* <Basics /> */}
       {/* <Functions /> */}
-      <Button variant="primary" size="sm" onClick={handleClick} type="submit">
+      {/* <Button variant="primary" size="sm" onClick={handleClick} type="submit">
         Save 1
       </Button>
       <Button variant="primary" size="sm" onClick={handleClick} type="button">
@@ -20,7 +21,8 @@ const App = () => {
       </Button>
       <Button variant="primary" size="sm">
         Save 3
-      </Button>
+      </Button> */}
+      <States />
     </>
   );
 };
