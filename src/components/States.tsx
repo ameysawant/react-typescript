@@ -1,27 +1,29 @@
 import { useState } from "react";
 
-type Status = "idle" | "loading" | "success" | "error";
-
+type Age = number;
+type Name = string;
+type Visibility = boolean;
+type Hobbies = string[];
+type HobbyInput = string;
 type User = {
   name: string;
   age: number;
 };
-
-type Name = string;
+type Status = "idle" | "loading" | "success" | "error";
 
 const States = () => {
   // Number
-  const [age, setAge] = useState<number>(25);
+  const [age, setAge] = useState<Age>(25);
 
   // String
   const [name, setName] = useState<Name>("");
 
   // Boolean
-  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [isVisible, setIsVisible] = useState<Visibility>(false);
 
   // Array
-  const [hobbies, setHobbies] = useState<string[]>(["Reading"]);
-  const [hobbyInput, setHobbyInput] = useState<string>("");
+  const [hobbies, setHobbies] = useState<Hobbies>(["Reading"]);
+  const [hobbyInput, setHobbyInput] = useState<HobbyInput>("");
 
   // Object
   const [user, setUser] = useState<User>({ name: "", age: 0 });
@@ -98,7 +100,8 @@ const States = () => {
         }
         placeholder="Age"
       />
-      <p>{JSON.stringify(user)}</p>
+      <p>{user.name}</p>
+      <p>{user.age}</p>
 
       {/* Union */}
       <h3>6. Union Type</h3>
