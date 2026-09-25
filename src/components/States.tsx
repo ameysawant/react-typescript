@@ -1,33 +1,43 @@
 import { useState } from "react";
 import Button from "./Button";
+import type { ChangeEvent } from "react";
 
-type Name = string;
-type Age = number;
+type MyName = string;
+type MyAge = number;
 type Visibility = boolean;
+type InputEvent = ChangeEvent<HTMLInputElement>;
 type Hobbies = string[];
 type HobbyInput = string;
-type SpiderMan = {
+type User = {
   name: string;
   age: number;
 };
 
 const States = () => {
-  const [name, setName] = useState<Name>("");
-  const [age, setAge] = useState<Age>(0);
+  const [myName, setMyName] = useState<MyName>("");
+  const [myAge, setMyAge] = useState<MyAge>(0);
   const [visible, setVisible] = useState<Visibility>(false);
   const [hobbies, setHobbies] = useState<Hobbies>(["cricket"]);
   const [hobbyInput, setHobbyInput] = useState<HobbyInput>("");
-  const [spiderMan, setSpiderMan] = useState<SpiderMan>({
+  const [user, setUser] = useState<User>({
     name: "",
     age: 0,
   });
 
+  const handleMyName = (e: InputEvent) => {
+    setMyName(e.target.value);
+  };
+
   const handleMyAge = () => {
-    setAge((prev) => prev + 1);
+    setMyAge((prev) => prev + 1);
   };
 
   const handleToggle = () => {
     setVisible((prev) => !prev);
+  };
+
+  const handleMyHobby = (e: InputEvent) => {
+    setHobbyInput(e.target.value);
   };
 
   const addHobby = () => {
@@ -35,43 +45,43 @@ const States = () => {
     setHobbyInput("");
   };
 
-  const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSpiderMan((prev) => ({ ...prev, name: e.target.value }));
+  const handleUserName = (e: InputEvent) => {
+    setUser((prev) => ({ ...prev, name: e.target.value }));
   };
-  const handleAge = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSpiderMan((prev) => ({ ...prev, age: Number(e.target.value) }));
+  const handleUserAge = (e: InputEvent) => {
+    setUser((prev) => ({ ...prev, age: Number(e.target.value) }));
   };
 
   return (
     <>
       <h2>States</h2>
-      <p>Name example</p>
+      <p>Name Example</p>
       <input
         type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
         placeholder="name"
+        value={myName}
+        onChange={handleMyName}
       />
-      {name || "No name"}
+      {myName}
 
-      <p>Age example</p>
+      <p>Age Example</p>
       <Button variant="primary" size="sm" onClick={handleMyAge}>
-        Increase my Age
+        increase my age
       </Button>
-      {age}
+      {myAge}
 
-      <p>Visible example</p>
+      <p>Visibility</p>
       <Button variant="primary" size="sm" onClick={handleToggle}>
         {visible ? "Hide" : "Show"}
       </Button>
-      {visible ? "visible" : "not visible"}
+      {visible ? "i am visible" : "not visible"}
 
-      <p>Array example</p>
+      <p>Hobbies</p>
       <input
         type="text"
-        placeholder="hobby"
-        onChange={(e) => setHobbyInput(e.target.value)}
+        placeholder="hobbies"
         value={hobbyInput}
+        onChange={handleMyHobby}
       />
       <Button variant="primary" size="sm" onClick={addHobby}>
         add hobby
@@ -80,21 +90,21 @@ const States = () => {
         return <p key={index}>{item}</p>;
       })}
 
-      <p>Object example</p>
+      <p>User example</p>
       <input
         type="text"
         placeholder="name"
-        value={spiderMan.name}
-        onChange={handleName}
+        value={user.name}
+        onChange={handleUserName}
       />
       <input
         type="text"
         placeholder="age"
-        value={spiderMan.age}
-        onChange={handleAge}
+        value={user.age}
+        onChange={handleUserAge}
       />
-      {spiderMan.name}
-      {spiderMan.age}
+      {user.name}
+      {user.age}
     </>
   );
 };
