@@ -3,148 +3,140 @@ import type { ChangeEvent, SubmitEvent } from "react";
 
 type InputChange = ChangeEvent<HTMLInputElement>;
 type SelectChange = ChangeEvent<HTMLSelectElement>;
-type TextareaChange = ChangeEvent<HTMLTextAreaElement>;
 type FormSubmit = SubmitEvent<HTMLFormElement>;
 
-type FormData = {
+// ---------- Types ----------
+type MyFormData = {
   firstName: string;
   email: string;
-  gender: string;
+  mobile: number;
   country: string;
+  termsAndConditions: boolean;
   newsletter: boolean;
-  terms: boolean;
-  accountType: string;
-  bio: string;
+  gender: string;
 };
 
-const initialForm: FormData = {
+// ---------- Initial Form ----------
+const initialForm: MyFormData = {
   firstName: "",
   email: "",
-  gender: "",
+  mobile: 0,
   country: "",
+  termsAndConditions: false,
   newsletter: false,
-  terms: false,
-  accountType: "",
-  bio: "",
+  gender: "",
 };
 
+// ---------- Component ----------
 const Forms = () => {
-  const [form, setForm] = useState<FormData>(initialForm);
-
-  const handleSubmit = (e: FormSubmit) => {
-    e.preventDefault();
-    console.log("Form submitted:", form);
-  };
+  const [myForm, setMyForm] = useState<MyFormData>(initialForm);
 
   const handleInputChange = (e: InputChange) => {
     const { name, value, type, checked } = e.target;
-    setForm((prev) => ({
+
+    setMyForm((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]:
+        type === "checkbox"
+          ? checked
+          : name === "mobile"
+            ? Number(value)
+            : value,
     }));
   };
 
   const handleSelectChange = (e: SelectChange) => {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    setMyForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleTextareaChange = (e: TextareaChange) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+  const handleSubmit = (e: FormSubmit) => {
+    e.preventDefault();
+    console.log("Form submitted:", myForm);
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* Text Input */}
+      {/* Text */}
       <input
         type="text"
-        placeholder="First name"
         name="firstName"
-        value={form.firstName}
+        placeholder="First Name"
+        value={myForm.firstName}
         onChange={handleInputChange}
       />
 
-      {/* Email Input */}
+      {/* Email */}
       <input
         type="email"
-        placeholder="Email"
         name="email"
-        value={form.email}
+        placeholder="Email"
+        value={myForm.email}
         onChange={handleInputChange}
       />
 
-      {/* Select Dropdown */}
-      <select name="gender" value={form.gender} onChange={handleSelectChange}>
-        <option value="">Select gender</option>
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-        <option value="other">Other</option>
-      </select>
+      {/* Mobile */}
+      <input
+        type="number"
+        name="mobile"
+        placeholder="Mobile"
+        value={myForm.mobile}
+        onChange={handleInputChange}
+      />
 
-      <select name="country" value={form.country} onChange={handleSelectChange}>
+      {/* Select */}
+      <select
+        name="country"
+        value={myForm.country}
+        onChange={handleSelectChange}
+      >
         <option value="">Select country</option>
         <option value="in">India</option>
         <option value="us">USA</option>
       </select>
 
-      <br />
+      {/* Radio */}
+      <label>
+        <input
+          type="radio"
+          name="gender"
+          value="male"
+          checked={myForm.gender === "male"}
+          onChange={handleInputChange}
+        />
+        Male
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="gender"
+          value="female"
+          checked={myForm.gender === "female"}
+          onChange={handleInputChange}
+        />
+        Female
+      </label>
 
-      {/* Checkbox 1 */}
+      {/* Checkbox */}
       <label>
         <input
           type="checkbox"
           name="newsletter"
-          checked={form.newsletter}
+          checked={myForm.newsletter}
           onChange={handleInputChange}
         />
         Subscribe to newsletter
       </label>
 
-      {/* Checkbox 2 */}
       <label>
         <input
           type="checkbox"
-          name="terms"
-          checked={form.terms}
+          name="termsAndConditions"
+          checked={myForm.termsAndConditions}
           onChange={handleInputChange}
         />
-        I accept the terms and conditions
+        I accept terms and conditions
       </label>
-
-      <br />
-
-      {/* Radio */}
-      <label>
-        <input
-          type="radio"
-          name="accountType"
-          value="personal"
-          checked={form.accountType === "personal"}
-          onChange={handleInputChange}
-        />
-        Personal
-      </label>
-      <label>
-        <input
-          type="radio"
-          name="accountType"
-          value="business"
-          checked={form.accountType === "business"}
-          onChange={handleInputChange}
-        />
-        Business
-      </label>
-
-      <br />
-
-      {/* Textarea */}
-      <textarea
-        placeholder="Bio / About you"
-        name="bio"
-        value={form.bio}
-        onChange={handleTextareaChange}
-      />
 
       <button type="submit">Submit</button>
     </form>
