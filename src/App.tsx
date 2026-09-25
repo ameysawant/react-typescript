@@ -1,5 +1,6 @@
 import Basics from "./components/Basics";
 import Button from "./components/Button";
+import Forms from "./components/Forms";
 import Functions from "./components/Functions";
 import States from "./components/States";
 
@@ -22,7 +23,8 @@ const App = () => {
       <Button variant="primary" size="sm">
         Save 3
       </Button> */}
-      <States />
+      {/* <States /> */}
+      <Forms />
     </>
   );
 };
