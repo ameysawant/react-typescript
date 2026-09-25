@@ -23,11 +23,11 @@ const States = () => {
   });
 
   const handleMyAge = () => {
-    setAge(age + 1);
+    setAge((prev) => prev + 1);
   };
 
   const handleToggle = () => {
-    setVisible(!visible);
+    setVisible((prev) => !prev);
   };
 
   const addHobby = () => {
