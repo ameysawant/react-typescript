@@ -1,114 +1,100 @@
 import { useState } from "react";
+import Button from "./Button";
 
-type Age = number;
 type Name = string;
+type Age = number;
 type Visibility = boolean;
 type Hobbies = string[];
 type HobbyInput = string;
-type User = {
+type SpiderMan = {
   name: string;
   age: number;
 };
-type Status = "idle" | "loading" | "success" | "error";
 
 const States = () => {
-  // Number
-  const [age, setAge] = useState<Age>(25);
-
-  // String
   const [name, setName] = useState<Name>("");
-
-  // Boolean
-  const [isVisible, setIsVisible] = useState<Visibility>(false);
-
-  // Array
-  const [hobbies, setHobbies] = useState<Hobbies>(["Reading"]);
+  const [age, setAge] = useState<Age>(0);
+  const [visible, setVisible] = useState<Visibility>(false);
+  const [hobbies, setHobbies] = useState<Hobbies>(["cricket"]);
   const [hobbyInput, setHobbyInput] = useState<HobbyInput>("");
+  const [spiderMan, setSpiderMan] = useState<SpiderMan>({
+    name: "",
+    age: 0,
+  });
 
-  // Object
-  const [user, setUser] = useState<User>({ name: "", age: 0 });
-
-  // Union
-  const [status, setStatus] = useState<Status>("idle");
-
-  // Array add
-  const addHobby = () => {
-    if (hobbyInput.trim()) {
-      setHobbies((prev) => [...prev, hobbyInput]);
-      setHobbyInput("");
-    }
+  const handleMyAge = () => {
+    setAge(age + 1);
   };
 
-  // Array remove
-  const removeHobby = (index: number) => {
-    setHobbies((prev) => prev.filter((_, i) => i !== index));
+  const handleToggle = () => {
+    setVisible(!visible);
+  };
+
+  const addHobby = () => {
+    setHobbies((prev) => [...prev, hobbyInput]);
+    setHobbyInput("");
+  };
+
+  const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSpiderMan((prev) => ({ ...prev, name: e.target.value }));
+  };
+  const handleAge = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSpiderMan((prev) => ({ ...prev, age: Number(e.target.value) }));
   };
 
   return (
     <>
-      <h2>useState Types</h2>
-
-      {/* Number */}
-      <h3>1. Number</h3>
-      <p>Age: {age}</p>
-      <button onClick={() => setAge(age + 1)}>Increase</button>
-
-      {/* String */}
-      <h3>2. String</h3>
+      <h2>States</h2>
+      <p>Name example</p>
       <input
+        type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        placeholder="Name"
+        placeholder="name"
       />
-      <p>Hello, {name || "stranger"}</p>
+      {name || "No name"}
 
-      {/* Boolean */}
-      <h3>3. Boolean</h3>
-      <button onClick={() => setIsVisible(!isVisible)}>
-        {isVisible ? "Hide" : "Show"}
-      </button>
-      {isVisible && <p>Now you see me!</p>}
+      <p>Age example</p>
+      <Button variant="primary" size="sm" onClick={handleMyAge}>
+        Increase my Age
+      </Button>
+      {age}
 
-      {/* Array */}
-      <h3>4. Array</h3>
+      <p>Visible example</p>
+      <Button variant="primary" size="sm" onClick={handleToggle}>
+        {visible ? "Hide" : "Show"}
+      </Button>
+      {visible ? "visible" : "not visible"}
+
+      <p>Array example</p>
       <input
-        value={hobbyInput}
+        type="text"
+        placeholder="hobby"
         onChange={(e) => setHobbyInput(e.target.value)}
-        placeholder="New hobby"
+        value={hobbyInput}
       />
-      <button onClick={addHobby}>Add</button>
-      <ul>
-        {hobbies.map((hobby, i) => (
-          <li key={i}>
-            {hobby} <button onClick={() => removeHobby(i)}>X</button>
-          </li>
-        ))}
-      </ul>
+      <Button variant="primary" size="sm" onClick={addHobby}>
+        add hobby
+      </Button>
+      {hobbies.map((item, index) => {
+        return <p key={index}>{item}</p>;
+      })}
 
-      {/* Object */}
-      <h3>5. Object</h3>
+      <p>Object example</p>
       <input
-        value={user.name}
-        onChange={(e) => setUser((prev) => ({ ...prev, name: e.target.value }))}
-        placeholder="Name"
+        type="text"
+        placeholder="name"
+        value={spiderMan.name}
+        onChange={handleName}
       />
       <input
-        type="number"
-        value={user.age}
-        onChange={(e) =>
-          setUser((prev) => ({ ...prev, age: Number(e.target.value) }))
-        }
-        placeholder="Age"
+        type="text"
+        placeholder="age"
+        value={spiderMan.age}
+        onChange={handleAge}
       />
-      <p>{user.name}</p>
-      <p>{user.age}</p>
-
-      {/* Union */}
-      <h3>6. Union Type</h3>
-      <button onClick={() => setStatus("loading")}>Loading</button>
-      <button onClick={() => setStatus("success")}>Success</button>
-      <button onClick={() => setStatus("error")}>Error</button>
-      <p>Status: {status}</p>
+      {spiderMan.name}
+      {spiderMan.age}
     </>
   );
 };
