@@ -3,6 +3,7 @@ import Button from "./components/Button";
 import Forms from "./components/Forms";
 import Functions from "./components/Functions";
 import Parent from "./components/Parent";
+import Refs from "./components/Refs";
 import States from "./components/States";
 
 const App = () => {
@@ -26,7 +27,8 @@ const App = () => {
       </Button> */}
       {/* <States /> */}
       {/* <Forms /> */}
-      <Parent />
+      {/* <Parent /> */}
+      <Refs />
     </>
   );
 };
