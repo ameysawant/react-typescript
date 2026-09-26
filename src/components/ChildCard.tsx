@@ -7,14 +7,14 @@ type CardProps = {
 };
 
 const ChildCard = ({ user, setUser }: CardProps) => {
-  const data = {
-    id: 1,
-    name: "Rahul",
-    email: "rahul@example.com",
-  } as User;
-
-  const handleLogin = () => {
-    setUser(data);
+  const handleLogin = async () => {
+    try {
+      const res = await fetch("https://jsonplaceholder.typicode.com/users/1");
+      const data = (await res.json()) as User;
+      setUser(data);
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
   };
 
   const handleLogout = () => {
