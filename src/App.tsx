@@ -2,7 +2,7 @@ import Basics from "./components/Basics";
 import Button from "./components/Button";
 import Forms from "./components/Forms";
 import Functions from "./components/Functions";
-import Setter from "./components/Setter";
+import Parent from "./components/Parent";
 import States from "./components/States";
 
 const App = () => {
@@ -26,7 +26,7 @@ const App = () => {
       </Button> */}
       {/* <States /> */}
       {/* <Forms /> */}
-      <Setter />
+      <Parent />
     </>
   );
 };
