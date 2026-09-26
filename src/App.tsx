@@ -2,6 +2,7 @@ import Basics from "./components/Basics";
 import Button from "./components/Button";
 import Forms from "./components/Forms";
 import Functions from "./components/Functions";
+import Setter from "./components/Setter";
 import States from "./components/States";
 
 const App = () => {
@@ -24,7 +25,8 @@ const App = () => {
         Save 3
       </Button> */}
       {/* <States /> */}
-      <Forms />
+      {/* <Forms /> */}
+      <Setter />
     </>
   );
 };
